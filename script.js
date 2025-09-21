@@ -93,7 +93,7 @@ function scrollToSection(sectionId) {
 // Form Input Formatting
 function setupInputFormatting() {
     // Format currency inputs
-    const currencyInputs = document.querySelectorAll('#rendaBruta, #valorImovel, #valorEntrada, #rendaFaturamento');
+    const currencyInputs = document.querySelectorAll('#valorImovel, #valorEntrada, #rendaFaturamento');
     currencyInputs.forEach(input => {
         input.addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
@@ -123,27 +123,6 @@ function setupInputFormatting() {
                     e.target.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
                 } else {
                     e.target.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
-                }
-            } else {
-                e.target.value = e.target.value.slice(0, -1);
-            }
-        });
-    }
-
-    // Format CPF input
-    const cpfInput = document.getElementById('cpf');
-    if (cpfInput) {
-        cpfInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length <= 11) {
-                if (value.length <= 3) {
-                    e.target.value = value;
-                } else if (value.length <= 6) {
-                    e.target.value = `${value.slice(0, 3)}.${value.slice(3)}`;
-                } else if (value.length <= 9) {
-                    e.target.value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)}`;
-                } else {
-                    e.target.value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9)}`;
                 }
             } else {
                 e.target.value = e.target.value.slice(0, -1);
@@ -206,14 +185,6 @@ function validateForm() {
         isValid = false;
     }
 
-    // Validate CPF only if filled
-    const cpf = document.getElementById('cpf');
-    if (cpf.value && !validateCPF(cpf.value)) {
-        cpf.style.borderColor = '#ef4444';
-        alert('CPF inválido. Por favor, verifique o número digitado.');
-        isValid = false;
-    }
-
     // Validate CPF/CNPJ only if filled
     const cpfCnpj = document.getElementById('cpfCnpj');
     if (cpfCnpj.value) {
@@ -236,10 +207,10 @@ function validateForm() {
     }
 
     // Validate email fields only if filled
-    const emailCorretor = document.getElementById('emailCorretor');
-    if (emailCorretor.value && !emailRegex.test(emailCorretor.value)) {
-        emailCorretor.style.borderColor = '#ef4444';
-        alert('E-mail do corretor inválido. Por favor, verifique o formato.');
+    const contatoCorretor = document.getElementById('contatoCorretor');
+    if (contatoCorretor.value && contatoCorretor.value.includes('@') && !emailRegex.test(contatoCorretor.value)) {
+        contatoCorretor.style.borderColor = '#ef4444';
+        alert('Formato de e-mail inválido no contato da corretora. Por favor, verifique o formato.');
         isValid = false;
     }
 
@@ -265,7 +236,7 @@ function generateWhatsAppMessage() {
     };
 
     // Dados Pessoais - only add if at least one field is filled
-    const personalFields = [data.nome, data.email, data.telefone, data.cpf, data.dataNascimento, data.idade, data.estadoCivil];
+    const personalFields = [data.nome, data.email, data.telefone, data.dataNascimento, data.idade, data.estadoCivil];
     const hasPersonalData = personalFields.some(field => field && field !== '');
     
     if (hasPersonalData) {
@@ -273,7 +244,6 @@ function generateWhatsAppMessage() {
         addField('Nome', data.nome);
         addField('E-mail', data.email);
         addField('WhatsApp', data.telefone);
-        addField('CPF', data.cpf);
         addField('Data de Nascimento', data.dataNascimento);
         addField('Idade', data.idade, ' anos');
         addField('Estado Civil', data.estadoCivil);
@@ -281,13 +251,12 @@ function generateWhatsAppMessage() {
     }
     
     // Dados Profissionais - only add if at least one field is filled
-    const professionalFields = [data.profissao, data.rendaBruta, data.tempoEmprego, data.tipoContrato];
+    const professionalFields = [data.profissao, data.tempoEmprego, data.tipoContrato];
     const hasProfessionalData = professionalFields.some(field => field && field !== '');
     
     if (hasProfessionalData) {
         message += `💼 *DADOS PROFISSIONAIS*\n`;
         addField('Profissão', data.profissao);
-        addField('Renda Bruta Mensal', data.rendaBruta);
         addField('Tempo no Emprego', data.tempoEmprego);
         addField('Tipo de Contrato', data.tipoContrato);
         message += `\n`;
@@ -320,14 +289,14 @@ function generateWhatsAppMessage() {
     }
 
     // Dados do Corretor/Imobiliária - only add if at least one field is filled
-    const brokerFields = [data.atendidoCorretor, data.nomeCorretor, data.emailCorretor];
+    const brokerFields = [data.atendidoCorretor, data.nomeCorretor, data.contatoCorretor];
     const hasBrokerData = brokerFields.some(field => field && field !== '');
     
     if (hasBrokerData) {
         message += `🏢 *CORRETOR/IMOBILIÁRIA*\n`;
         addField('Atendido por corretor', data.atendidoCorretor);
         addField('Nome do Corretor/Imobiliária', data.nomeCorretor);
-        addField('E-mail do Corretor', data.emailCorretor);
+        addField('Contato da Corretora', data.contatoCorretor);
         message += `\n`;
     }
 
