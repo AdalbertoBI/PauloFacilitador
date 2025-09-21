@@ -318,7 +318,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Performance optimization
+    // Performance optimization - Lazy loading commented out to fix image visibility issues
+    /*
     const lazyImages = document.querySelectorAll('img[loading="lazy"]');
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries) => {
@@ -334,6 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         lazyImages.forEach(img => imageObserver.observe(img));
     }
+    */
 });
 
 // Global Functions for Inline Event Handlers
