@@ -238,7 +238,7 @@ function handleFormSubmit(e) {
     // Generate WhatsApp message
     setTimeout(() => {
         const message = generateWhatsAppMessage();
-        const whatsappUrl = `https://wa.me/5512991425017?text=${message}`;
+        const whatsappUrl = `https://wa.me/5512978601796?text=${message}`;
         
         // Open WhatsApp
         window.open(whatsappUrl, '_blank');
