@@ -127,30 +127,27 @@ function setupInputFormatting() {
     }
 }
 
-// Form Validation
+// Form Validation (Optional - only validates filled fields)
 function validateForm() {
     const form = document.getElementById('preAnaliseForm');
-    const requiredFields = form.querySelectorAll('[required]');
     let isValid = true;
     
-    requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-            field.style.borderColor = '#ef4444';
-            isValid = false;
-        } else {
-            field.style.borderColor = '#10b981';
-        }
+    // Reset all field borders
+    const allFields = form.querySelectorAll('input, select, textarea');
+    allFields.forEach(field => {
+        field.style.borderColor = '';
     });
 
-    // Validate email
+    // Validate email only if filled
     const email = document.getElementById('email');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email.value && !emailRegex.test(email.value)) {
         email.style.borderColor = '#ef4444';
+        alert('E-mail inválido. Por favor, verifique o formato.');
         isValid = false;
     }
 
-    // Validate CPF
+    // Validate CPF only if filled
     const cpf = document.getElementById('cpf');
     if (cpf.value && !validateCPF(cpf.value)) {
         cpf.style.borderColor = '#ef4444';
@@ -158,10 +155,11 @@ function validateForm() {
         isValid = false;
     }
 
-    // Validate phone
+    // Validate phone only if filled
     const phone = document.getElementById('telefone');
-    if (phone.value && phone.value.replace(/\D/g, '').length < 11) {
+    if (phone.value && phone.value.replace(/\D/g, '').length < 10) {
         phone.style.borderColor = '#ef4444';
+        alert('Telefone inválido. Por favor, insira um número válido.');
         isValid = false;
     }
 
@@ -174,43 +172,74 @@ function generateWhatsAppMessage() {
     const data = {};
     
     for (let [key, value] of formData.entries()) {
-        data[key] = value;
+        data[key] = value.trim();
     }
 
     let message = `🏠 *PRÉ-ANÁLISE DE CRÉDITO IMOBILIÁRIO*\n\n`;
     
-    // Dados Pessoais
-    message += `👤 *DADOS PESSOAIS*\n`;
-    message += `• Nome: ${data.nome}\n`;
-    message += `• E-mail: ${data.email}\n`;
-    message += `• WhatsApp: ${data.telefone}\n`;
-    message += `• CPF: ${data.cpf}\n`;
-    message += `• Data de Nascimento: ${data.dataNascimento}\n`;
-    message += `• Idade: ${data.idade} anos\n`;
-    message += `• Estado Civil: ${data.estadoCivil}\n\n`;
+    // Helper function to add field only if not empty
+    const addField = (label, value, unit = '') => {
+        if (value && value !== '') {
+            message += `• ${label}: ${value}${unit}\n`;
+        }
+    };
+
+    // Dados Pessoais - only add if at least one field is filled
+    const personalFields = [data.nome, data.email, data.telefone, data.cpf, data.dataNascimento, data.idade, data.estadoCivil];
+    const hasPersonalData = personalFields.some(field => field && field !== '');
     
-    // Dados Profissionais
-    message += `💼 *DADOS PROFISSIONAIS*\n`;
-    message += `• Profissão: ${data.profissao}\n`;
-    message += `• Renda Bruta Mensal: ${data.rendaBruta}\n`;
-    message += `• Tempo no Emprego: ${data.tempoEmprego}\n`;
-    message += `• Tipo de Contrato: ${data.tipoContrato}\n\n`;
+    if (hasPersonalData) {
+        message += `👤 *DADOS PESSOAIS*\n`;
+        addField('Nome', data.nome);
+        addField('E-mail', data.email);
+        addField('WhatsApp', data.telefone);
+        addField('CPF', data.cpf);
+        addField('Data de Nascimento', data.dataNascimento);
+        addField('Idade', data.idade, ' anos');
+        addField('Estado Civil', data.estadoCivil);
+        message += `\n`;
+    }
     
-    // Dados do Imóvel
-    message += `🏡 *DADOS DO IMÓVEL*\n`;
-    message += `• Valor do Imóvel: ${data.valorImovel}\n`;
-    message += `• Valor da Entrada: ${data.valorEntrada}\n`;
-    message += `• Tipo do Imóvel: ${data.tipoImovel}\n`;
-    message += `• Cidade: ${data.cidade}\n\n`;
+    // Dados Profissionais - only add if at least one field is filled
+    const professionalFields = [data.profissao, data.rendaBruta, data.tempoEmprego, data.tipoContrato];
+    const hasProfessionalData = professionalFields.some(field => field && field !== '');
     
-    // Situação Financeira
-    message += `💰 *SITUAÇÃO FINANCEIRA*\n`;
-    message += `• Primeiro Imóvel: ${data.primeiroImovel}\n`;
-    message += `• Tem FGTS: ${data.fgts}\n`;
-    message += `• Score: ${data.score}\n`;
-    message += `• Pendências Financeiras: ${data.negativado}\n\n`;
+    if (hasProfessionalData) {
+        message += `💼 *DADOS PROFISSIONAIS*\n`;
+        addField('Profissão', data.profissao);
+        addField('Renda Bruta Mensal', data.rendaBruta);
+        addField('Tempo no Emprego', data.tempoEmprego);
+        addField('Tipo de Contrato', data.tipoContrato);
+        message += `\n`;
+    }
     
-    if (data.observacoes) {
+    // Dados do Imóvel - only add if at least one field is filled
+    const propertyFields = [data.valorImovel, data.valorEntrada, data.tipoImovel, data.cidade];
+    const hasPropertyData = propertyFields.some(field => field && field !== '');
+    
+    if (hasPropertyData) {
+        message += `🏡 *DADOS DO IMÓVEL*\n`;
+        addField('Valor do Imóvel', data.valorImovel);
+        addField('Valor da Entrada', data.valorEntrada);
+        addField('Tipo do Imóvel', data.tipoImovel);
+        addField('Cidade', data.cidade);
+        message += `\n`;
+    }
+    
+    // Situação Financeira - only add if at least one field is filled
+    const financialFields = [data.primeiroImovel, data.fgts, data.score, data.negativado];
+    const hasFinancialData = financialFields.some(field => field && field !== '');
+    
+    if (hasFinancialData) {
+        message += `💰 *SITUAÇÃO FINANCEIRA*\n`;
+        addField('Primeiro Imóvel', data.primeiroImovel);
+        addField('Tem FGTS', data.fgts);
+        addField('Score', data.score);
+        addField('Pendências Financeiras', data.negativado);
+        message += `\n`;
+    }
+    
+    if (data.observacoes && data.observacoes !== '') {
         message += `📝 *OBSERVAÇÕES*\n`;
         message += `${data.observacoes}\n\n`;
     }
@@ -225,7 +254,6 @@ function handleFormSubmit(e) {
     e.preventDefault();
     
     if (!validateForm()) {
-        alert('Por favor, preencha todos os campos obrigatórios corretamente.');
         return false;
     }
 
@@ -238,7 +266,7 @@ function handleFormSubmit(e) {
     // Generate WhatsApp message
     setTimeout(() => {
         const message = generateWhatsAppMessage();
-        const whatsappUrl = `https://wa.me/5512991425017?text=${message}`;
+        const whatsappUrl = `https://wa.me/5511978601796?text=${message}`;
         
         // Open WhatsApp
         window.open(whatsappUrl, '_blank');
