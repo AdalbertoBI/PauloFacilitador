@@ -119,16 +119,9 @@ function setupInputFormatting() {
                 age--;
             }
             
-            if (age >= 18 && age <= 80) {
+            // Simply calculate and set the age without validation
+            if (age >= 0) {
                 ageInput.value = age;
-            } else if (age < 18) {
-                alert('Idade mínima para financiamento é 18 anos.');
-                e.target.value = '';
-                ageInput.value = '';
-            } else if (age > 80) {
-                alert('Idade máxima para financiamento é 80 anos.');
-                e.target.value = '';
-                ageInput.value = '';
             }
         });
     }
