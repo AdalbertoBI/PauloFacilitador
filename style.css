@@ -81,7 +81,12 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 51, 102, 0.1);
+    background-image: 
+        linear-gradient(135deg, rgba(0, 51, 102, 0.8) 0%, rgba(0, 102, 204, 0.8) 100%),
+        url('./images/condominio-luxo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     z-index: 1;
 }
 

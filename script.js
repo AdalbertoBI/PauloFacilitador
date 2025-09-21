@@ -550,6 +550,25 @@ window.addEventListener('error', function(e) {
     console.error('JavaScript Error:', e.error);
 });
 
+// Hide Navigation on Scroll
+let lastScrollTop = 0;
+const header = document.querySelector('.header');
+
+function hideNavOnScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Only hide when scrolling down and past the initial threshold
+    if (scrollTop > 100 && scrollTop > lastScrollTop) {
+        // Scrolling down
+        header.classList.add('hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+}
+
+// Add scroll event listener
+window.addEventListener('scroll', hideNavOnScroll);
+
 // Service Worker Registration (for PWA capabilities)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
