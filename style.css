@@ -5,23 +5,23 @@
 }
 
 :root {
-    --primary-color: #1e40af;
-    --primary-hover: #1d4ed8;
+    --primary-color: #003366;
+    --primary-hover: #004080;
     --secondary-color: #f8fafc;
-    --accent-color: #06b6d4;
-    --text-color: #1e293b;
-    --text-muted: #64748b;
+    --accent-color: #0066cc;
+    --text-color: #1a202c;
+    --text-muted: #4a5568;
     --border-color: #e2e8f0;
     --white: #ffffff;
     --whatsapp-green: #25d366;
     --whatsapp-hover: #20c058;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --gradient-primary: linear-gradient(135deg, #1e40af 0%, #06b6d4 100%);
+    --gradient-primary: linear-gradient(135deg, #003366 0%, #0066cc 100%);
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', 'Inter', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--white);
@@ -47,15 +47,18 @@ body {
 }
 
 .nav-brand h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 800;
     color: var(--primary-color);
     margin-bottom: 0.25rem;
+    font-family: 'Poppins', sans-serif;
 }
 
 .nav-brand span {
-    font-size: 0.875rem;
-    color: var(--text-muted);
+    font-size: 1rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Main Content */
