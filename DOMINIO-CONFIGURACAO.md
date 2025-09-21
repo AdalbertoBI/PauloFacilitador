@@ -90,10 +90,14 @@ www.paulofacilitador.com.br. IN  CNAME adalbertobi.github.io.
 ### 3.1 Tempo de Propagação
 - **Tempo normal:** 1-4 horas
 - **Tempo máximo:** até 48 horas  
-- **Registro.br geralmente:** 15-30 minutos
+- **Registro.br:** Publicações DNS a cada 5 minutos
+- **Propagação Registro.br:** geralmente 15-30 minutos
+
+**Importante:** Segundo a documentação oficial do Registro.br, alterações passam por um período de transição de 24 horas.
 
 ### 3.2 Verificar Propagação
 Use estas ferramentas online:
+- **Registro.br (Oficial):** https://registro.br/tecnologia/ferramentas/verificacao-de-dns/
 - https://dnschecker.org/
 - https://whatsmydns.net/
 - https://dns.google/ (consultar paulofacilitador.com.br)
