@@ -1,0 +1,26 @@
+{
+  "name": "Paulo Facilitador - FlowCredi",
+  "short_name": "Paulo FlowCredi",
+  "description": "Consultor especialista em crédito imobiliário - FlowCredi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#003366",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "business", "productivity"],
+  "lang": "pt-BR",
+  "orientation": "portrait"
+}
