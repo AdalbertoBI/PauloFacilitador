@@ -7,6 +7,36 @@ function formatPhone(value) {
     return value.replace(/\D/g, '').replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
 }
 
+function validateCPF(cpf) {
+    // Remove formatting
+    cpf = cpf.replace(/\D/g, '');
+    
+    // Check if has 11 digits or is a sequence
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+        return false;
+    }
+    
+    // Validate first digit
+    let sum = 0;
+    for (let i = 0; i < 9; i++) {
+        sum += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let digit1 = (sum * 10) % 11;
+    if (digit1 === 10) digit1 = 0;
+    if (digit1 !== parseInt(cpf.charAt(9))) return false;
+    
+    // Validate second digit
+    sum = 0;
+    for (let i = 0; i < 10; i++) {
+        sum += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    let digit2 = (sum * 10) % 11;
+    if (digit2 === 10) digit2 = 0;
+    if (digit2 !== parseInt(cpf.charAt(10))) return false;
+    
+    return true;
+}
+
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -53,6 +83,55 @@ function setupInputFormatting() {
             }
         });
     }
+
+    // Format CPF input
+    const cpfInput = document.getElementById('cpf');
+    if (cpfInput) {
+        cpfInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                if (value.length <= 3) {
+                    e.target.value = value;
+                } else if (value.length <= 6) {
+                    e.target.value = `${value.slice(0, 3)}.${value.slice(3)}`;
+                } else if (value.length <= 9) {
+                    e.target.value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)}`;
+                } else {
+                    e.target.value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9)}`;
+                }
+            } else {
+                e.target.value = e.target.value.slice(0, -1);
+            }
+        });
+    }
+
+    // Auto-calculate age from birth date
+    const birthDateInput = document.getElementById('dataNascimento');
+    const ageInput = document.getElementById('idade');
+    if (birthDateInput && ageInput) {
+        birthDateInput.addEventListener('change', function(e) {
+            const birthDate = new Date(e.target.value);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            
+            if (age >= 18 && age <= 80) {
+                ageInput.value = age;
+            } else if (age < 18) {
+                alert('Idade mínima para financiamento é 18 anos.');
+                e.target.value = '';
+                ageInput.value = '';
+            } else if (age > 80) {
+                alert('Idade máxima para financiamento é 80 anos.');
+                e.target.value = '';
+                ageInput.value = '';
+            }
+        });
+    }
 }
 
 // Form Validation
@@ -75,6 +154,14 @@ function validateForm() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email.value && !emailRegex.test(email.value)) {
         email.style.borderColor = '#ef4444';
+        isValid = false;
+    }
+
+    // Validate CPF
+    const cpf = document.getElementById('cpf');
+    if (cpf.value && !validateCPF(cpf.value)) {
+        cpf.style.borderColor = '#ef4444';
+        alert('CPF inválido. Por favor, verifique o número digitado.');
         isValid = false;
     }
 
@@ -104,6 +191,8 @@ function generateWhatsAppMessage() {
     message += `• Nome: ${data.nome}\n`;
     message += `• E-mail: ${data.email}\n`;
     message += `• WhatsApp: ${data.telefone}\n`;
+    message += `• CPF: ${data.cpf}\n`;
+    message += `• Data de Nascimento: ${data.dataNascimento}\n`;
     message += `• Idade: ${data.idade} anos\n`;
     message += `• Estado Civil: ${data.estadoCivil}\n\n`;
     
