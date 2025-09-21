@@ -1,0 +1,30 @@
+{
+  "name": "paulofacilitador-site",
+  "version": "1.0.0",
+  "description": "Site profissional do consultor Paulo, especialista em crédito imobiliário",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo 'Build completed - static site ready'",
+    "deploy": "echo 'Deploy to GitHub Pages'",
+    "dev": "live-server --port=3000 --open=index.html"
+  },
+  "keywords": [
+    "crédito imobiliário",
+    "financiamento",
+    "consultor",
+    "casa própria",
+    "paulo facilitador"
+  ],
+  "author": "Paulo Facilitador",
+  "license": "MIT",
+  "homepage": "https://paulofacilitador.github.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PauloFacilitador/paulofacilitador.github.io"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.1"
+  }
+}
