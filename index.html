@@ -72,16 +72,25 @@
         <section id="principal" class="tab-content active">
             <!-- Hero Section -->
             <section class="hero">
-                <div class="hero-content">
-                    <h2>Realize o Sonho da Casa Própria com Segurança</h2>
-                    <p class="hero-subtitle">Sou Paulo, consultor especializado em crédito imobiliário. Com anos de experiência, ajudo pessoas a conquistarem seu lar através do financiamento ideal.</p>
-                    <button class="cta-button" onclick="scrollToSection('pre-analise')">
-                        <i class="fas fa-calculator"></i>
-                        Faça uma Pré-Análise
-                    </button>
+                <div class="hero-background">
+                    <img src="./images/luxury-apartments-bg.jpg" alt="Apartamentos de luxo" class="hero-bg-image" loading="lazy">
+                    <div class="hero-overlay"></div>
                 </div>
-                <div class="hero-image">
-                    <i class="fas fa-home"></i>
+                <div class="hero-content">
+                    <div>
+                        <h2>Realize o Sonho da Casa Própria com Segurança</h2>
+                        <p class="hero-subtitle">Sou Paulo, consultor especializado em crédito imobiliário. Com anos de experiência, ajudo pessoas a conquistarem seu lar através do financiamento ideal.</p>
+                        <button class="cta-button" onclick="scrollToSection('pre-analise')">
+                            <i class="fas fa-calculator"></i>
+                            Faça uma Pré-Análise
+                        </button>
+                    </div>
+                    <div class="hero-image">
+                        <div class="property-showcase">
+                            <img src="./images/luxury-house-1.jpg" alt="Casa de luxo" class="property-img" loading="lazy">
+                            <img src="./images/luxury-apartment-1.jpg" alt="Apartamento de luxo" class="property-img" loading="lazy">
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -111,9 +120,12 @@
                             </div>
                         </div>
                         <div class="about-image">
-                            <div class="profile-placeholder">
-                                <i class="fas fa-user-tie"></i>
-                                <p>Paulo</p>
+                            <div class="profile-photo">
+                                <img src="./images/paulo-facilitador.jpg" alt="Paulo Facilitador - Consultor de Crédito Imobiliário" class="profile-img">
+                                <div class="profile-info">
+                                    <h4>Paulo Facilitador</h4>
+                                    <p>Consultor Especialista</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -331,6 +343,53 @@
                             </button>
                         </div>
                     </form>
+                </div>
+            </section>
+
+            <!-- Properties Gallery Section -->
+            <section class="properties-gallery">
+                <div class="container">
+                    <h3>Imóveis dos Sonhos Aguardam Você</h3>
+                    <p class="section-subtitle">Conheça alguns dos tipos de imóveis que nossos clientes conseguiram financiar</p>
+                    
+                    <div class="properties-grid">
+                        <div class="property-card">
+                            <img src="./images/luxury-house-2.jpg" alt="Casa de luxo com piscina" class="property-image" loading="lazy">
+                            <div class="property-overlay">
+                                <h4>Casas de Luxo</h4>
+                                <p>Amplas, com jardim e área de lazer</p>
+                            </div>
+                        </div>
+                        <div class="property-card">
+                            <img src="./images/luxury-apartment-2.jpg" alt="Apartamento moderno" class="property-image" loading="lazy">
+                            <div class="property-overlay">
+                                <h4>Apartamentos Modernos</h4>
+                                <p>Vista privilegiada e acabamento premium</p>
+                            </div>
+                        </div>
+                        <div class="property-card">
+                            <img src="./images/luxury-condo.jpg" alt="Condomínio de luxo" class="property-image" loading="lazy">
+                            <div class="property-overlay">
+                                <h4>Condomínios Exclusivos</h4>
+                                <p>Segurança e comodidade para sua família</p>
+                            </div>
+                        </div>
+                        <div class="property-card">
+                            <img src="./images/luxury-penthouse.jpg" alt="Cobertura de luxo" class="property-image" loading="lazy">
+                            <div class="property-overlay">
+                                <h4>Coberturas Premium</h4>
+                                <p>O máximo em elegância e sofisticação</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-cta">
+                        <p>Encontre o imóvel perfeito para você</p>
+                        <button class="cta-button" onclick="scrollToSection('pre-analise')">
+                            <i class="fas fa-search"></i>
+                            Fazer Pré-Análise Agora
+                        </button>
+                    </div>
                 </div>
             </section>
 
