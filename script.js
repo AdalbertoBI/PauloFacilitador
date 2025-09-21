@@ -455,28 +455,24 @@ function setupAnimations() {
     });
 }
 
-// Header Scroll Effect
+// Header Scroll Effect - Hide on scroll down, don't reappear
 function setupHeaderScroll() {
     const header = document.querySelector('.header');
     let lastScrollY = window.scrollY;
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(255, 255, 255, 0.95)';
-            header.style.backdropFilter = 'blur(10px)';
-        } else {
-            header.style.background = '#ffffff';
-            header.style.backdropFilter = 'none';
+        const currentScrollY = window.scrollY;
+        
+        // Hide header when scrolling down past 100px
+        if (currentScrollY > 100 && currentScrollY > lastScrollY) {
+            header.classList.add('hidden');
         }
-
-        // Hide/show header on scroll
-        if (window.scrollY > lastScrollY && window.scrollY > 200) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
+        // Only show header when at the very top (less than 50px)
+        else if (currentScrollY <= 50) {
+            header.classList.remove('hidden');
         }
         
-        lastScrollY = window.scrollY;
+        lastScrollY = currentScrollY;
     });
 }
 
