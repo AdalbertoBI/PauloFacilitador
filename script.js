@@ -14,29 +14,6 @@ function scrollToSection(sectionId) {
     }
 }
 
-// Tab Navigation
-function switchTab(tabId) {
-    // Hide all tab contents
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(content => content.classList.remove('active'));
-
-    // Remove active class from all nav items
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => item.classList.remove('active'));
-
-    // Show selected tab content
-    const selectedTab = document.getElementById(tabId);
-    if (selectedTab) {
-        selectedTab.classList.add('active');
-    }
-
-    // Add active class to selected nav item
-    const selectedNavItem = document.querySelector(`[data-tab="${tabId}"]`);
-    if (selectedNavItem) {
-        selectedNavItem.classList.add('active');
-    }
-}
-
 // Form Input Formatting
 function setupInputFormatting() {
     // Format currency inputs
@@ -308,15 +285,6 @@ function trackWhatsAppClicks() {
 
 // Initialize Application
 document.addEventListener('DOMContentLoaded', function() {
-    // Setup tab navigation
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
-            switchTab(tabId);
-        });
-    });
-
     // Setup form
     const form = document.getElementById('preAnaliseForm');
     if (form) {
@@ -370,7 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Global Functions for Inline Event Handlers
 window.scrollToSection = scrollToSection;
-window.switchTab = switchTab;
 
 // Error Handling
 window.addEventListener('error', function(e) {
