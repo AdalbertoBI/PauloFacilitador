@@ -12,6 +12,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Responsive Images and Media */
+img, video, iframe, embed, object {
+    max-width: 100%;
+    height: auto;
+}
+
+img {
+    display: block;
+}
+
+/* Prevent horizontal scroll on small devices */
+html {
+    overflow-x: hidden;
+}
+
+/* Container Responsive */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 body {
@@ -49,14 +74,14 @@ body {
 
 .nav-brand h1 {
     color: var(--primary-blue);
-    font-size: 1.8rem;
+    font-size: 1.98rem;
     font-weight: 700;
     margin-bottom: 0.2rem;
 }
 
 .nav-brand span {
     color: var(--secondary-blue);
-    font-size: 0.9rem;
+    font-size: 0.99rem;
     font-weight: 500;
 }
 
@@ -98,14 +123,14 @@ body {
 }
 
 .hero h2 {
-    font-size: 3rem;
+    font-size: 3.3rem;
     font-weight: 700;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.32rem;
     margin-bottom: 2rem;
     opacity: 0.95;
     line-height: 1.6;
@@ -121,6 +146,7 @@ body {
 
 .stat-badge {
     background: rgba(255, 255, 255, 0.15);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 1rem 1.5rem;
     border-radius: 10px;
@@ -131,13 +157,13 @@ body {
 
 .stat-number {
     display: block;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: #ffffff;
 }
 
 .stat-text {
-    font-size: 0.9rem;
+    font-size: 0.99rem;
     opacity: 0.9;
 }
 
@@ -147,7 +173,7 @@ body {
     border: none;
     padding: 1rem 2rem;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1.21rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -162,20 +188,13 @@ body {
     box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
 }
 
-/* Container */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
 /* Section Styles */
 section {
     padding: 4rem 0;
 }
 
 section h3 {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     text-align: center;
     margin-bottom: 1rem;
     color: var(--primary-blue);
@@ -184,7 +203,7 @@ section h3 {
 
 .section-subtitle {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1.21rem;
     color: var(--text-light);
     margin-bottom: 3rem;
     max-width: 600px;
@@ -206,7 +225,7 @@ section h3 {
 
 .about-text p {
     margin-bottom: 1.5rem;
-    font-size: 1.1rem;
+    font-size: 1.21rem;
     line-height: 1.8;
     color: var(--text-light);
 }
@@ -227,14 +246,14 @@ section h3 {
 }
 
 .stat-item .stat-number {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     font-weight: 700;
     color: var(--secondary-blue);
     display: block;
 }
 
 .stat-item .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.99rem;
     color: var(--text-light);
     font-weight: 500;
 }
@@ -297,11 +316,11 @@ section h3 {
     justify-content: center;
     margin: 0 auto 1.5rem;
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: 1.65rem;
 }
 
 .benefit-item h4 {
-    font-size: 1.3rem;
+    font-size: 1.43rem;
     color: var(--primary-blue);
     margin-bottom: 1rem;
     font-weight: 600;
@@ -345,7 +364,7 @@ section h3 {
 
 .form-section h4 {
     color: var(--primary-blue);
-    font-size: 1.2rem;
+    font-size: 1.32rem;
     margin-bottom: 1.5rem;
     font-weight: 600;
     border-bottom: 2px solid var(--secondary-blue);
@@ -361,7 +380,7 @@ section h3 {
     margin-bottom: 0.5rem;
     color: var(--text-dark);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 1.045rem;
 }
 
 .form-group input,
@@ -371,7 +390,7 @@ section h3 {
     padding: 0.8rem 1rem;
     border: 2px solid #e9ecef;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-family: 'Poppins', sans-serif;
     transition: all 0.3s ease;
     background: var(--white);
@@ -401,7 +420,7 @@ section h3 {
     border: none;
     padding: 1rem 3rem;
     border-radius: 50px;
-    font-size: 1.2rem;
+    font-size: 1.32rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -455,13 +474,13 @@ section h3 {
 }
 
 .property-overlay h4 {
-    font-size: 1.3rem;
+    font-size: 1.43rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
 .property-overlay p {
-    font-size: 0.95rem;
+    font-size: 1.045rem;
     opacity: 0.9;
 }
 
@@ -475,7 +494,7 @@ section h3 {
 }
 
 .gallery-cta p {
-    font-size: 1.2rem;
+    font-size: 1.32rem;
     color: var(--text-light);
     margin-bottom: 1.5rem;
 }
@@ -505,7 +524,7 @@ section h3 {
     color: var(--text-light);
     line-height: 1.8;
     margin-bottom: 1.5rem;
-    font-size: 1.1rem;
+    font-size: 1.21rem;
 }
 
 .testimonial-author strong {
@@ -515,7 +534,7 @@ section h3 {
 
 .testimonial-author span {
     color: var(--text-light);
-    font-size: 0.9rem;
+    font-size: 0.99rem;
     display: block;
     margin-top: 0.3rem;
 }
@@ -533,7 +552,7 @@ section h3 {
 }
 
 .contact-content p {
-    font-size: 1.2rem;
+    font-size: 1.32rem;
     margin-bottom: 2rem;
     opacity: 0.9;
 }
@@ -544,7 +563,7 @@ section h3 {
     text-decoration: none;
     padding: 1rem 2.5rem;
     border-radius: 50px;
-    font-size: 1.2rem;
+    font-size: 1.32rem;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
@@ -568,15 +587,28 @@ section h3 {
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
     margin-bottom: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2rem;
+}
+
+.footer-section {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
 }
 
 .footer-section h4 {
     color: var(--white);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-weight: 600;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--secondary-blue);
+    padding-bottom: 0.5rem;
 }
 
 .footer-section p {
@@ -615,15 +647,22 @@ section h3 {
 
 .contact-item {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.8rem;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
     color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
 }
 
 .contact-item i {
     color: var(--secondary-blue);
     width: 20px;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.contact-item span {
+    word-break: break-word;
 }
 
 .footer-links {
@@ -688,7 +727,83 @@ section h3 {
 }
 
 /* Responsive Design */
+
+/* Large Desktop */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .hero h2 {
+        font-size: 4rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+}
+
+/* Desktop */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    .hero h2 {
+        font-size: 3rem;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .profile-img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .hero {
+        padding: 3rem 1rem;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
+}
+
+/* Mobile Landscape & Small Tablets */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
     .nav {
         padding: 1rem;
     }
@@ -701,17 +816,27 @@ section h3 {
         margin-top: 70px;
     }
     
+    .hero {
+        padding: 2rem 1rem;
+    }
+    
     .hero h2 {
         font-size: 2rem;
     }
     
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
     .hero-stats {
         gap: 1rem;
+        flex-direction: column;
+        align-items: center;
     }
     
     .stat-badge {
-        min-width: 120px;
-        padding: 0.8rem 1rem;
+        min-width: 200px;
+        padding: 1rem 1.5rem;
     }
     
     .about-content {
@@ -726,8 +851,9 @@ section h3 {
     }
     
     .profile-img {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 1rem;
     }
     
     .benefits-grid {
@@ -737,31 +863,37 @@ section h3 {
     
     .form-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
     .pre-analise-form {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1rem;
+        margin: 0 1rem;
     }
     
     .properties-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
     .testimonials-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
     .footer-content {
         grid-template-columns: 1fr;
+        gap: 2rem;
         text-align: center;
-    }
-    
-    .container {
         padding: 0 1rem;
     }
     
+    .footer-section {
+        min-height: unset;
+    }
+    
     section h3 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     
     .whatsapp-float {
@@ -769,26 +901,38 @@ section h3 {
         right: 15px;
         width: 50px;
         height: 50px;
-        font-size: 1.3rem;
+        font-size: 1.43rem;
     }
 }
 
+/* Small Mobile Devices */
 @media (max-width: 480px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+    
     .hero {
-        padding: 3rem 1rem;
+        padding: 2rem 0.5rem;
     }
     
     .hero h2 {
         font-size: 1.8rem;
+        line-height: 1.2;
     }
     
     .hero-subtitle {
         font-size: 1rem;
+        line-height: 1.4;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 0.5rem;
     }
     
     .stat-badge {
-        min-width: 100px;
-        padding: 0.6rem 0.8rem;
+        min-width: 160px;
+        padding: 0.8rem 1rem;
     }
     
     .stat-number {
@@ -796,28 +940,63 @@ section h3 {
     }
     
     .cta-button {
-        padding: 0.8rem 1.5rem;
+        padding: 1rem 1.5rem;
         font-size: 1rem;
+        width: 100%;
+        max-width: 280px;
     }
     
     .submit-button {
-        padding: 0.8rem 2rem;
+        padding: 1rem 2rem;
         font-size: 1.1rem;
+        width: 100%;
+        max-width: 280px;
     }
     
     section {
-        padding: 3rem 0;
+        padding: 2rem 0;
     }
     
     section h3 {
         font-size: 1.8rem;
+        line-height: 1.2;
+    }
+    
+    .profile-img {
+        width: 150px;
+        height: 150px;
     }
     
     .form-section {
-        padding: 1.5rem;
+        padding: 1rem;
+        margin: 0 0.5rem;
     }
     
     .pre-analise-form {
-        padding: 1.5rem;
+        padding: 1rem;
+        margin: 0 0.5rem;
+    }
+    
+    .form-grid {
+        gap: 1rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    
+    .property-card {
+        height: 250px;
+    }
+    
+    .whatsapp-float {
+        bottom: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
     }
 }
