@@ -37,6 +37,52 @@ function validateCPF(cpf) {
     return true;
 }
 
+function validateCNPJ(cnpj) {
+    // Remove formatting
+    cnpj = cnpj.replace(/\D/g, '');
+    
+    // Check if has 14 digits or is a sequence
+    if (cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) {
+        return false;
+    }
+    
+    // Validate first digit
+    let sum = 0;
+    let weight = 2;
+    for (let i = 11; i >= 0; i--) {
+        sum += parseInt(cnpj.charAt(i)) * weight;
+        weight = weight === 9 ? 2 : weight + 1;
+    }
+    let digit1 = sum % 11;
+    digit1 = digit1 < 2 ? 0 : 11 - digit1;
+    if (digit1 !== parseInt(cnpj.charAt(12))) return false;
+    
+    // Validate second digit
+    sum = 0;
+    weight = 2;
+    for (let i = 12; i >= 0; i--) {
+        sum += parseInt(cnpj.charAt(i)) * weight;
+        weight = weight === 9 ? 2 : weight + 1;
+    }
+    let digit2 = sum % 11;
+    digit2 = digit2 < 2 ? 0 : 11 - digit2;
+    if (digit2 !== parseInt(cnpj.charAt(13))) return false;
+    
+    return true;
+}
+
+function formatCpfCnpj(value) {
+    const numbers = value.replace(/\D/g, '');
+    
+    if (numbers.length <= 11) {
+        // Format as CPF
+        return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    } else {
+        // Format as CNPJ
+        return numbers.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    }
+}
+
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -47,7 +93,7 @@ function scrollToSection(sectionId) {
 // Form Input Formatting
 function setupInputFormatting() {
     // Format currency inputs
-    const currencyInputs = document.querySelectorAll('#rendaBruta, #valorImovel, #valorEntrada');
+    const currencyInputs = document.querySelectorAll('#rendaBruta, #valorImovel, #valorEntrada, #rendaFaturamento');
     currencyInputs.forEach(input => {
         input.addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
@@ -105,6 +151,19 @@ function setupInputFormatting() {
         });
     }
 
+    // Format CPF/CNPJ input
+    const cpfCnpjInput = document.getElementById('cpfCnpj');
+    if (cpfCnpjInput) {
+        cpfCnpjInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 14) {
+                e.target.value = formatCpfCnpj(value);
+            } else {
+                e.target.value = e.target.value.slice(0, -1);
+            }
+        });
+    }
+
     // Auto-calculate age from birth date
     const birthDateInput = document.getElementById('dataNascimento');
     const ageInput = document.getElementById('idade');
@@ -155,11 +214,32 @@ function validateForm() {
         isValid = false;
     }
 
+    // Validate CPF/CNPJ only if filled
+    const cpfCnpj = document.getElementById('cpfCnpj');
+    if (cpfCnpj.value) {
+        const numbers = cpfCnpj.value.replace(/\D/g, '');
+        const isValidCpfCnpj = numbers.length === 11 ? validateCPF(numbers) : numbers.length === 14 ? validateCNPJ(numbers) : false;
+        
+        if (!isValidCpfCnpj) {
+            cpfCnpj.style.borderColor = '#ef4444';
+            alert('CPF/CNPJ inválido. Por favor, verifique o número digitado.');
+            isValid = false;
+        }
+    }
+
     // Validate phone only if filled
     const phone = document.getElementById('telefone');
     if (phone.value && phone.value.replace(/\D/g, '').length < 10) {
         phone.style.borderColor = '#ef4444';
         alert('Telefone inválido. Por favor, insira um número válido.');
+        isValid = false;
+    }
+
+    // Validate email fields only if filled
+    const emailCorretor = document.getElementById('emailCorretor');
+    if (emailCorretor.value && !emailRegex.test(emailCorretor.value)) {
+        emailCorretor.style.borderColor = '#ef4444';
+        alert('E-mail do corretor inválido. Por favor, verifique o formato.');
         isValid = false;
     }
 
@@ -236,6 +316,55 @@ function generateWhatsAppMessage() {
         addField('Tem FGTS', data.fgts);
         addField('Score', data.score);
         addField('Pendências Financeiras', data.negativado);
+        message += `\n`;
+    }
+
+    // Dados do Corretor/Imobiliária - only add if at least one field is filled
+    const brokerFields = [data.atendidoCorretor, data.nomeCorretor, data.emailCorretor];
+    const hasBrokerData = brokerFields.some(field => field && field !== '');
+    
+    if (hasBrokerData) {
+        message += `🏢 *CORRETOR/IMOBILIÁRIA*\n`;
+        addField('Atendido por corretor', data.atendidoCorretor);
+        addField('Nome do Corretor/Imobiliária', data.nomeCorretor);
+        addField('E-mail do Corretor', data.emailCorretor);
+        message += `\n`;
+    }
+
+    // Tipo de Operação - only add if at least one field is filled
+    const operationFields = [data.tipoOperacao, data.tipoComprador, data.cpfCnpj, data.rendaFaturamento];
+    const hasOperationData = operationFields.some(field => field && field !== '');
+    
+    if (hasOperationData) {
+        message += `📋 *TIPO DE OPERAÇÃO*\n`;
+        addField('Tipo de Imóvel', data.tipoOperacao);
+        addField('Comprador', data.tipoComprador);
+        addField('CPF/CNPJ', data.cpfCnpj);
+        addField('Renda/Faturamento', data.rendaFaturamento);
+        message += `\n`;
+    }
+
+    // Dados Bancários - only add if at least one field is filled
+    const bankFields = [data.bancoPrincipal, data.agencia, data.conta, data.outrosBancos];
+    const hasBankData = bankFields.some(field => field && field !== '');
+    
+    if (hasBankData) {
+        message += `🏦 *DADOS BANCÁRIOS*\n`;
+        addField('Banco Principal', data.bancoPrincipal);
+        addField('Agência', data.agencia);
+        addField('Conta', data.conta);
+        addField('Outros Bancos', data.outrosBancos);
+        message += `\n`;
+    }
+
+    // Perfil Adicional - only add if at least one field is filled
+    const profileFields = [data.servidorPublico, data.residenciaAtual];
+    const hasProfileData = profileFields.some(field => field && field !== '');
+    
+    if (hasProfileData) {
+        message += `👨‍💼 *PERFIL ADICIONAL*\n`;
+        addField('Servidor Público', data.servidorPublico);
+        addField('Residência Atual', data.residenciaAtual);
         message += `\n`;
     }
     

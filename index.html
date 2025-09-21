@@ -337,6 +337,102 @@
                                 </div>
                             </div>
 
+                            <!-- Dados do Corretor/Imobiliária -->
+                            <div class="form-section">
+                                <h4>Corretor/Imobiliária</h4>
+                                <div class="form-group">
+                                    <label for="atendidoCorretor">Foi atendido por corretor ou imobiliária?</label>
+                                    <select id="atendidoCorretor" name="atendidoCorretor">
+                                        <option value="">Selecione</option>
+                                        <option value="sim">Sim</option>
+                                        <option value="nao">Não</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nomeCorretor">Qual imobiliária/corretor lhe atendeu?</label>
+                                    <input type="text" id="nomeCorretor" name="nomeCorretor">
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailCorretor">E-mail do Corretor/Imobiliária</label>
+                                    <input type="email" id="emailCorretor" name="emailCorretor">
+                                </div>
+                            </div>
+
+                            <!-- Tipo de Operação -->
+                            <div class="form-section">
+                                <h4>Tipo de Operação</h4>
+                                <div class="form-group">
+                                    <label for="tipoOperacao">Tipo de Imóvel</label>
+                                    <select id="tipoOperacao" name="tipoOperacao">
+                                        <option value="">Selecione</option>
+                                        <option value="residencial">Residencial</option>
+                                        <option value="comercial">Comercial</option>
+                                        <option value="terreno">Terreno</option>
+                                        <option value="terreno-construcao">Terreno + Construção</option>
+                                        <option value="credito-garantia">Crédito com Garantia de Imóvel</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tipoComprador">Comprador</label>
+                                    <select id="tipoComprador" name="tipoComprador">
+                                        <option value="">Selecione</option>
+                                        <option value="pessoa-fisica">Pessoa Física</option>
+                                        <option value="pessoa-juridica">Pessoa Jurídica</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cpfCnpj">CPF ou CNPJ</label>
+                                    <input type="text" id="cpfCnpj" name="cpfCnpj" placeholder="000.000.000-00 ou 00.000.000/0000-00">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rendaFaturamento">Renda Bruta Mensal ou Faturamento Anual</label>
+                                    <input type="text" id="rendaFaturamento" name="rendaFaturamento" placeholder="R$ 0,00">
+                                </div>
+                            </div>
+
+                            <!-- Dados Bancários -->
+                            <div class="form-section">
+                                <h4>Dados Bancários</h4>
+                                <div class="form-group">
+                                    <label for="bancoPrincipal">Correntista de qual banco?</label>
+                                    <input type="text" id="bancoPrincipal" name="bancoPrincipal" placeholder="Ex: Banco do Brasil, Itaú, Bradesco...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="agencia">Agência</label>
+                                    <input type="text" id="agencia" name="agencia" placeholder="0000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="conta">Conta</label>
+                                    <input type="text" id="conta" name="conta" placeholder="00000-0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="outrosBancos">É correntista de outros bancos?</label>
+                                    <textarea id="outrosBancos" name="outrosBancos" rows="3" placeholder="Informe o nome do banco, agência e conta. Pode informar mais de um banco caso possua."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Informações Adicionais do Perfil -->
+                            <div class="form-section">
+                                <h4>Perfil Adicional</h4>
+                                <div class="form-group">
+                                    <label for="servidorPublico">Servidor Público</label>
+                                    <select id="servidorPublico" name="servidorPublico">
+                                        <option value="">Selecione</option>
+                                        <option value="sim">Sim</option>
+                                        <option value="nao">Não</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="residenciaAtual">Informações sobre a sua residência atual</label>
+                                    <select id="residenciaAtual" name="residenciaAtual">
+                                        <option value="">Selecione</option>
+                                        <option value="mora-pais">Mora com os Pais</option>
+                                        <option value="imovel-alugado">Mora em Imóvel Alugado</option>
+                                        <option value="imovel-proprio">Mora em Imóvel Próprio</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <!-- Observações -->
                             <div class="form-section full-width">
                                 <h4>Informações Adicionais</h4>
