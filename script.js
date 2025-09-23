@@ -502,6 +502,15 @@ document.addEventListener('DOMContentLoaded', function() {
     setupHeaderScroll();
     trackWhatsAppClicks();
 
+    // Init testimonials carousel
+    initTestimonialsCarousel();
+
+    // Ajustar deslocamento da área principal conforme a altura do header
+    adjustMainTopOffset();
+    window.addEventListener('resize', adjustMainTopOffset);
+
+    // Header compacto sem logo não precisa de padding adaptativo
+
     // Add loading protection
     window.addEventListener('beforeunload', function(e) {
         const form = document.getElementById('preAnaliseForm');
@@ -579,3 +588,59 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
+
+// Testimonials Carousel Logic
+function initTestimonialsCarousel() {
+    const carousel = document.querySelector('.testimonials-carousel');
+    if (!carousel) return;
+
+    const viewport = carousel.querySelector('.carousel-viewport');
+    const track = carousel.querySelector('.carousel-track');
+    const items = Array.from(track.querySelectorAll('.testimonial-item'));
+    const prevBtn = carousel.querySelector('.carousel-btn.prev');
+    const nextBtn = carousel.querySelector('.carousel-btn.next');
+
+    if (!viewport || !track || items.length === 0) return;
+
+    let index = 0;
+
+    function update() {
+        const itemWidth = items[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap || 0);
+        const offset = -(index * itemWidth);
+        track.style.transform = `translateX(${offset}px)`;
+    }
+
+    function next() {
+        index = (index + 1) % items.length;
+        update();
+    }
+
+    function prev() {
+        index = (index - 1 + items.length) % items.length;
+        update();
+    }
+
+    nextBtn && nextBtn.addEventListener('click', next);
+    prevBtn && prevBtn.addEventListener('click', prev);
+
+    // Keyboard accessibility
+    carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft') prev();
+    });
+
+    // Resize handling to recalc widths
+    window.addEventListener('resize', update);
+
+    // Initialize position
+    update();
+}
+// Ajusta a margem-top da main para não ficar coberta pelo header fixo
+function adjustMainTopOffset() {
+    const headerEl = document.querySelector('.header');
+    const mainEl = document.querySelector('.main');
+    if (!headerEl || !mainEl) return;
+    const headerHeight = headerEl.getBoundingClientRect().height;
+    mainEl.style.marginTop = `${Math.ceil(headerHeight)}px`;
+}
+

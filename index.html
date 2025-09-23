@@ -63,8 +63,10 @@
     <header class="header">
         <div class="nav">
             <div class="nav-brand">
-                <h1>Paulo Facilitador</h1>
-                <span>FlowCredi</span>
+                <div class="brand-text">
+                    <h1>Paulo Facilitador</h1>
+                    <span>FlowCredi</span>
+                </div>
             </div>
         </div>
     </header>
@@ -125,6 +127,7 @@
                             <div class="profile-photo">
                                 <img src="./images/paulo-facilitador.jpg" alt="Paulo Facilitador - FlowCredi" class="profile-img">
                                 <div class="profile-info">
+                                    <img src="./images/icone.jpeg" alt="FlowCredi Logo" class="company-logo">
                                     <h4>Paulo Facilitador</h4>
                                     <p>Especialista FlowCredi</p>
                                 </div>
@@ -185,6 +188,8 @@
                     </div>
                 </div>
             </section>
+
+            
 
             <!-- Pre-Analysis Form Section -->
             <section id="pre-analise" class="pre-analise">
@@ -496,34 +501,72 @@
             <section class="testimonials">
                 <div class="container">
                     <h3>O que dizem meus clientes</h3>
-                    <div class="testimonials-grid">
-                        <div class="testimonial-item">
-                            <div class="testimonial-content">
-                                <p>"Paulo foi fundamental para conseguir meu financiamento. Ele conseguiu uma taxa excelente e cuidou de toda a documentação. Recomendo!"</p>
-                                <div class="testimonial-author">
-                                    <strong>Maria Silva</strong>
-                                    <span>Apartamento 2 quartos - São José dos Campos</span>
+                    <div class="testimonials-carousel">
+                        <button class="carousel-btn prev" aria-label="Depoimento anterior" title="Anterior">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="carousel-viewport">
+                            <div class="carousel-track">
+                                <div class="testimonial-item fade-in">
+                                    <div class="testimonial-content">
+                                        <p>"Paulo me atendeu de forma personalizada mesmo fora do horário comercial. Isto pra mim fez toda diferença."</p>
+                                        <div class="testimonial-author">
+                                            <strong>Jorge Augusto Torres Lage</strong>
+                                            <span>Imóvel de Alto Padrão Urbanova</span>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="testimonial-item fade-in">
+                                    <div class="testimonial-content">
+                                        <p>"Paulo trabalha com os principais bancos do país. O que me garantiu agilidade e acompanhamento completo desde a análise até a conclusão do financiamento."</p>
+                                        <div class="testimonial-author">
+                                            <strong>Bianca Rosenthal</strong>
+                                            <span>Casa em Condomínio Jardim do Golfe SJC - SP</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-item fade-in">
+                                    <div class="testimonial-content">
+                                        <p>"Consegui aprovação rápida e condições excelentes com o apoio do Paulo. O processo foi simples e bem acompanhado do início ao fim."</p>
+                                        <div class="testimonial-author">
+                                            <strong>Carlos Almeida</strong>
+                                            <span>Apartamento - Morumbi, São Paulo</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-item fade-in">
+                                    <div class="testimonial-content">
+                                        <p>"Paulo foi fundamental para conseguir meu financiamento. Ele conseguiu uma taxa excelente e cuidou de toda a documentação. Recomendo!"</p>
+                                        <div class="testimonial-author">
+                                            <strong>Maria Silva</strong>
+                                            <span>Apartamento 2 quartos - São José dos Campos</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-item fade-in">
+                                    <div class="testimonial-content">
+                                        <p>"Estava com dificuldades para conseguir aprovação em outros bancos. Paulo analisou meu perfil e encontrou a solução perfeita!"</p>
+                                        <div class="testimonial-author">
+                                            <strong>João Santos</strong>
+                                            <span>Casa 3 quartos - Taubaté</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-item fade-in">
+                                    <div class="testimonial-content">
+                                        <p>"Profissional competente e atencioso. Me orientou em todo o processo e conseguiu condições que eu não sabia que existiam."</p>
+                                        <div class="testimonial-author">
+                                            <strong>Ana Costa</strong>
+                                            <span>Apartamento 1 quarto - Jacareí</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
-                        <div class="testimonial-item">
-                            <div class="testimonial-content">
-                                <p>"Estava com dificuldades para conseguir aprovação em outros bancos. Paulo analisou meu perfil e encontrou a solução perfeita!"</p>
-                                <div class="testimonial-author">
-                                    <strong>João Santos</strong>
-                                    <span>Casa 3 quartos - Taubaté</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-item">
-                            <div class="testimonial-content">
-                                <p>"Profissional competente e atencioso. Me orientou em todo o processo e conseguiu condições que eu não sabia que existiam."</p>
-                                <div class="testimonial-author">
-                                    <strong>Ana Costa</strong>
-                                    <span>Apartamento 1 quarto - Jacareí</span>
-                                </div>
-                            </div>
-                        </div>
+                        <button class="carousel-btn next" aria-label="Próximo depoimento" title="Próximo">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -620,6 +663,11 @@
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/5511978601796" target="_blank" rel="noopener" class="whatsapp-float" title="Falar com Paulo no WhatsApp" aria-label="Botão flutuante para contato via WhatsApp">
         <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- FlowCredi Floating Icon (inferior esquerdo) -->
+    <a href="https://flowcredi.com.br/" target="_blank" rel="noopener" class="flow-float" title="Ir para o site da FlowCredi" aria-label="Ir para o site da FlowCredi">
+        <img src="./images/icone.jpeg" alt="Logo FlowCredi" class="flow-float-img">
     </a>
 
     <script src="script.js"></script>
