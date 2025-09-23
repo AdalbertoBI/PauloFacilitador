@@ -189,8 +189,13 @@ function validateForm() {
     const cpfCnpj = document.getElementById('cpfCnpj');
     if (cpfCnpj.value) {
         const numbers = cpfCnpj.value.replace(/\D/g, '');
-        const isValidCpfCnpj = numbers.length === 11 ? validateCPF(numbers) : numbers.length === 14 ? validateCNPJ(numbers) : false;
-        
+        let isValidCpfCnpj = false;
+        if (numbers.length === 11) {
+            isValidCpfCnpj = validateCPF(numbers);
+        } else if (numbers.length === 14) {
+            isValidCpfCnpj = validateCNPJ(numbers);
+        }
+
         if (!isValidCpfCnpj) {
             cpfCnpj.style.borderColor = '#ef4444';
             alert('CPF/CNPJ inválido. Por favor, verifique o número digitado.');
@@ -207,9 +212,10 @@ function validateForm() {
     }
 
     // Validate email fields only if filled
-    const contatoCorretor = document.getElementById('contatoCorretor');
-    if (contatoCorretor.value && contatoCorretor.value.includes('@') && !emailRegex.test(contatoCorretor.value)) {
-        contatoCorretor.style.borderColor = '#ef4444';
+    const contatoCorretorEl = document.getElementById('contatoCorretor');
+    const contatoCorretorVal = contatoCorretorEl?.value?.trim() || '';
+    if (contatoCorretorVal?.includes('@') && !emailRegex.test(contatoCorretorVal)) {
+        if (contatoCorretorEl) contatoCorretorEl.style.borderColor = '#ef4444';
         alert('Formato de e-mail inválido no contato da corretora. Por favor, verifique o formato.');
         isValid = false;
     }
@@ -511,44 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Header compacto sem logo não precisa de padding adaptativo
 
-    // Add loading protection
-    window.addEventListener('beforeunload', function(e) {
-        const form = document.getElementById('preAnaliseForm');
-        if (form) {
-            let hasData = false;
-            const inputs = form.querySelectorAll('input, select, textarea');
-            inputs.forEach(input => {
-                if (input.value.trim() && input.value.trim() !== 'R$ 0,00') {
-                    hasData = true;
-                }
-            });
-            
-            if (hasData) {
-                e.preventDefault();
-                e.returnValue = 'Você tem dados não salvos. Tem certeza que deseja sair?';
-                return e.returnValue;
-            }
-        }
-    });
-
-    // Performance optimization - Lazy loading commented out to fix image visibility issues
-    /*
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-
-        lazyImages.forEach(img => imageObserver.observe(img));
-    }
-    */
+    // Removido o alerta de navegação (beforeunload) por usar API obsoleta e gerar aviso no linter
 });
 
 // Global Functions for Inline Event Handlers
@@ -620,8 +589,8 @@ function initTestimonialsCarousel() {
         update();
     }
 
-    nextBtn && nextBtn.addEventListener('click', next);
-    prevBtn && prevBtn.addEventListener('click', prev);
+    nextBtn?.addEventListener('click', next);
+    prevBtn?.addEventListener('click', prev);
 
     // Keyboard accessibility
     carousel.addEventListener('keydown', (e) => {
